@@ -4,11 +4,12 @@ var express = require ('express');
 var app = express();
 
 app.get('/', function(req,res){
+    process.stdout.write(".");
     var db = new dbmodule("posts.db");
     db.get(function(err, posts) {
 
         res.json({"posts" : posts});
-
+        process.stdout.write("-");
     });
 });
 
