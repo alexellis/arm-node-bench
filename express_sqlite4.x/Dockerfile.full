@@ -1,0 +1,28 @@
+FROM armv7/armhf-ubuntu
+RUN apt-get update && \
+    apt-get -qy install wget unzip \
+                build-essential python
+
+WORKDIR /root/
+ADD node-v0.12.7-linux-arm-v7.tar.gz /
+
+
+RUN useradd web -m
+WORKDIR /home/web/
+USER web
+ADD package.json ./
+RUN npm install --build-from-source
+
+EXPOSE 3000
+ADD db.js ./
+ADD app.js ./
+ADD provision.sql ./
+
+USER root
+RUN apt-get update && apt-get -qy install \
+    sqlite
+USER web
+RUN sqlite3 posts.db < provision.sql
+
+
+CMD ["node", "app.js"]

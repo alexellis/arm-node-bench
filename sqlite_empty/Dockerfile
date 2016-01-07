@@ -5,7 +5,10 @@ RUN apt-get update && \
 		sqlite
 
 WORKDIR /root/
-ADD node-v0.12.7-linux-arm-v7.tar.gz /
+RUN wget \
+  https://nodejs.org/dist/latest-v4.x/node-v4.2.4-linux-armv7l.tar.gz
+RUN tar -xvf node-v4.2.4-linux-armv7l.tar.gz -C /usr/local \
+  --strip-components=1
 
 RUN useradd web -m
 WORKDIR /home/web/
@@ -13,5 +16,3 @@ USER web
 ADD package.json ./
 RUN npm install --build-from-source
 
-# This package allows us to npm install once and then use the cached results
-# without having to build Sqlite over and over (takes 30 min +)
