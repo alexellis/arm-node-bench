@@ -1,0 +1,18 @@
+## Benchmarking Node.js etc on ARMv7
+
+Repository for benchmarking Node.js, SQLite and Ghost blogging on ARMv7 (Raspberry PI)
+
+Concept:
+
+Build up images starting with:
+
+* a simple node HTTP server
+* an express server
+* express plus SQLite
+* Ghost with SQLite back-end
+* Ghost with JSON back-end
+
+Outcome:
+
+Determine bottlenecks running Ghost blogging platform on ARMv7 and contribute back to project.
+
